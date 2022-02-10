@@ -24,6 +24,12 @@ namespace Rawdata_Porfolio_2.Entity_Framework   // There's a typo in "Portfolio"
         List<Title> GetTitles();
 
         List<Title> GetNewTitles();
+        
+        List<Title> GetRandTitles();
+        
+        List<Title> GetTrTitles();
+        
+        List<Title> GetUserFavTitles(int userID);
 
         Title GetTitleById(long Id);
 
@@ -256,8 +262,100 @@ namespace Rawdata_Porfolio_2.Entity_Framework   // There's a typo in "Portfolio"
                 Console.WriteLine(result);
                 return result;
             }
-
-            //return ctx.Titles.ToList();
+        }
+        
+        public List<Title> GetTrTitles()
+        {
+            using (var cmd = new NpgsqlCommand("SELECT * FROM select_top_rated_titles();", connection.Connect()))
+            {
+                NpgsqlDataReader reader = cmd.ExecuteReader();
+                List<Title> result = new List<Title>();
+                while (reader.Read())
+                {
+                    Title row = new Title()
+                    {
+                        Id = (long)reader["ID"],
+                        Type = reader["type"].ToString(),
+                        Name = reader["name"].ToString(),
+                        IsAdult = (bool)reader["isadult"],
+                        Year_Start = Convert.IsDBNull(reader["year_start"]) ? null : (short?) reader["year_start"],
+                        Year_End = Convert.IsDBNull(reader["year_end"]) ? null : (short?) reader["year_end"],
+                        Runtime = Convert.IsDBNull(reader["runtime"]) ? null : (int?) reader["runtime"],
+                        AvgRating = Convert.IsDBNull(reader["avg_rating"]) ? null : (double?) reader["avg_rating"],
+                        Poster = reader["poster"].ToString(),
+                        Plot = reader["plot"].ToString(),
+                        Awards = reader["awards"].ToString(),
+                        Genres = reader["genres"].ToString()
+                    };
+                    result.Add(row);
+                }
+                connection.Connect().Close();
+                Console.WriteLine(result);
+                return result;
+            }
+        }
+        
+        public List<Title> GetRandTitles()
+        {
+            using (var cmd = new NpgsqlCommand("SELECT * FROM select_random_titles();", connection.Connect()))
+            {
+                NpgsqlDataReader reader = cmd.ExecuteReader();
+                List<Title> result = new List<Title>();
+                while (reader.Read())
+                {
+                    Title row = new Title()
+                    {
+                        Id = (long)reader["ID"],
+                        Type = reader["type"].ToString(),
+                        Name = reader["name"].ToString(),
+                        IsAdult = (bool)reader["isadult"],
+                        Year_Start = Convert.IsDBNull(reader["year_start"]) ? null : (short?) reader["year_start"],
+                        Year_End = Convert.IsDBNull(reader["year_end"]) ? null : (short?) reader["year_end"],
+                        Runtime = Convert.IsDBNull(reader["runtime"]) ? null : (int?) reader["runtime"],
+                        AvgRating = Convert.IsDBNull(reader["avg_rating"]) ? null : (double?) reader["avg_rating"],
+                        Poster = reader["poster"].ToString(),
+                        Plot = reader["plot"].ToString(),
+                        Awards = reader["awards"].ToString(),
+                        Genres = reader["genres"].ToString()
+                    };
+                    result.Add(row);
+                }
+                connection.Connect().Close();
+                Console.WriteLine(result);
+                return result;
+            }
+        }
+        
+        public List<Title> GetUserFavTitles(int userID)
+        {
+            using (var cmd = new NpgsqlCommand("SELECT * FROM select_fav_titles(@UID);", connection.Connect()))
+            {
+                cmd.Parameters.AddWithValue("UID", userID);
+                NpgsqlDataReader reader = cmd.ExecuteReader();
+                List<Title> result = new List<Title>();
+                while (reader.Read())
+                {
+                    Title row = new Title()
+                    {
+                        Id = (long)reader["ID"],
+                        Type = reader["type"].ToString(),
+                        Name = reader["name"].ToString(),
+                        IsAdult = (bool)reader["isadult"],
+                        Year_Start = Convert.IsDBNull(reader["year_start"]) ? null : (short?) reader["year_start"],
+                        Year_End = Convert.IsDBNull(reader["year_end"]) ? null : (short?) reader["year_end"],
+                        Runtime = Convert.IsDBNull(reader["runtime"]) ? null : (int?) reader["runtime"],
+                        AvgRating = Convert.IsDBNull(reader["avg_rating"]) ? null : (double?) reader["avg_rating"],
+                        Poster = reader["poster"].ToString(),
+                        Plot = reader["plot"].ToString(),
+                        Awards = reader["awards"].ToString(),
+                        Genres = reader["genres"].ToString()
+                    };
+                    result.Add(row);
+                }
+                connection.Connect().Close();
+                Console.WriteLine(result);
+                return result;
+            }
         }
 
         public List<Character> GetCharactersFromTitleById(long title_Id)

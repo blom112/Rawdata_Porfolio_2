@@ -9,12 +9,12 @@ namespace Rawdata_Porfolio_2.Pages.Entity_Framework.Domain
     public class User
     {
         [Key]
-        public int Id { get; set; }
+        public int? Id { get; set; }
         public string Username { get; set; } 
         public byte[] Password { get; set; }
         public string Email { get; set; }
-        public DateTime DateOfBirth { get; set; }
-        public DateTime Created { get; set; }
+        public DateTime? DateOfBirth { get; set; }
+        public DateTime? Created { get; set; }
         public List<Bookmarks_Personality> Bookmarks_Personalities { get; set; }
         public List<Bookmarks_Title> Bookmarks_Titles { get; set; }
         public List<Rating> Ratings { get; set; }

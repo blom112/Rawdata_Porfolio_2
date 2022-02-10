@@ -30,18 +30,10 @@
             });
         };
         
-        let charsFromTitle = ko.observableArray([]);
         let newTitles = ko.observableArray([]);
-
-        let getCharsFromTitle = () => {
-            console.log("getCharsFromTitle");
-            ds.getCharsFromTitle(2, data => {
-                console.log(data);
-                charsFromTitle(data);
-            });
-            //         currentView("Frontpage");
-        }
-        getCharsFromTitle();
+        let favTitles = ko.observableArray([]);
+        let trTitles = ko.observableArray([]);
+        let randTitles = ko.observableArray([]);
         
         let getNewTitles = () => {
             console.log("getNewTitles");
@@ -52,12 +44,43 @@
         }
         getNewTitles();
 
+        let getFavTitles = () => {
+            console.log("getFavTitles");
+            ds.getFavTitles(localStorage.getItem('id'), data => {
+                console.log(data);
+                favTitles(data);
+            });
+        }
+        getFavTitles();
+
+        let getTrTitles = () => {
+            console.log("getTrTitles");
+            ds.getTrTitles(data => {
+                console.log(data);
+                trTitles(data);
+            });
+        }
+        getTrTitles();
+
+        let getRandTitles = () => {
+            console.log("getRandTitles");
+            ds.getRandTitles(data => {
+                console.log(data);
+                randTitles(data);
+            });
+        }
+        getRandTitles();
+
         return {
             carouselControls,
-            charsFromTitle,
-            getCharsFromTitle,
             newTitles,
-            getNewTitles
+            favTitles,
+            trTitles,
+            randTitles,
+            getNewTitles,
+            getFavTitles,
+            getTrTitles,
+            getRandTitles
         };
     };
 });

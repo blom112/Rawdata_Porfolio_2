@@ -124,7 +124,7 @@ namespace Webservice.Controllers
             return new BookmarkPersonalityViewModel
             {
                 Url = _linkGenerator.GetUriByName(HttpContext, nameof(GetBookmarkTitlesForUser), new { bookmarkPersonality.Personality_Id }),
-                UserID = bookmarkPersonality.User.Id,
+                UserID = bookmarkPersonality.User_Id,
                 PersonalityName = bookmarkPersonality.Name
             };
         }

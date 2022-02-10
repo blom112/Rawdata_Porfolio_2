@@ -5,11 +5,6 @@ define(["knockout", "postman", 'dataService'], function (ko, postman, ds) {
     let dobSignup = ko.observable();
     let usernameLogin = ko.observable();
     let passwordLogin = ko.observable();
-    
-    let personalityInTitle = [
-        { title: "List", component: "list-categories" },
-
-    ];
 
     let currentView = ko.observable('Frontpage');
 
@@ -37,7 +32,7 @@ define(["knockout", "postman", 'dataService'], function (ko, postman, ds) {
         ds.register(user, data => {
             console.log(data);
         });
-
+        location.reload();
     };
 
     let login = () => {
@@ -63,6 +58,7 @@ define(["knockout", "postman", 'dataService'], function (ko, postman, ds) {
         localStorage.removeItem("token");
         localStorage.removeItem("id");
         postman.publish("changeView", "Frontpage");
+        location.reload();
     };
 
     return {

@@ -57,6 +57,45 @@ namespace Webservice.Controllers
             
             return Ok(titles.Select(x => GetTitleViewModel(x)));
         }
+        
+        [HttpGet("favTitles")]
+        public IActionResult GetFavTitles(int uid)
+        {
+            var titles = _dataService.GetUserFavTitles(uid);
+
+            if (titles == null)
+            {
+                return NotFound();
+            }    
+            
+            return Ok(titles.Select(x => GetTitleViewModel(x)));
+        }
+        
+        [HttpGet("trTitles")]
+        public IActionResult GetTrTitles()
+        {
+            var titles = _dataService.GetTrTitles();
+
+            if (titles == null)
+            {
+                return NotFound();
+            }    
+            
+            return Ok(titles.Select(x => GetTitleViewModel(x)));
+        }
+        
+        [HttpGet("randTitles")]
+        public IActionResult GetRandTitles()
+        {
+            var titles = _dataService.GetRandTitles();
+
+            if (titles == null)
+            {
+                return NotFound();
+            }    
+            
+            return Ok(titles.Select(x => GetTitleViewModel(x)));
+        }
 
         [HttpGet("{id}/CharactersFromTitle")]
         public IActionResult GetCharactersFromTitle(long id)

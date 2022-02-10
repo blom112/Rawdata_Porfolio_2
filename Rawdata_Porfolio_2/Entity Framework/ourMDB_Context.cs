@@ -52,7 +52,7 @@ namespace Rawdata_Porfolio_2.Entity_Framework
             modelBuilder.Entity<Bookmarks_Personality>().Property(x => x.User_Id).HasColumnName("user_ID");
             modelBuilder.Entity<Bookmarks_Personality>().Property(x => x.Personality_Id).HasColumnName("personality_ID");
             modelBuilder.Entity<Bookmarks_Personality>().Property(x => x.Note).HasColumnName("note");
-            modelBuilder.Entity<Bookmarks_Personality>().Property(x => x.Timestamp).HasColumnName("timestamp");
+            modelBuilder.Entity<Bookmarks_Personality>().Property(x => x.Timestamp).HasColumnName("timestamp").HasDefaultValueSql("CURRENT_TIMESTAMP");
             
 
 
@@ -60,7 +60,7 @@ namespace Rawdata_Porfolio_2.Entity_Framework
             modelBuilder.Entity<Bookmarks_Title>().Property(x => x.User_Id).HasColumnName("user_ID");
             modelBuilder.Entity<Bookmarks_Title>().Property(x => x.Title_Id).HasColumnName("title_ID");
             modelBuilder.Entity<Bookmarks_Title>().Property(x => x.Note).HasColumnName("note");
-            modelBuilder.Entity<Bookmarks_Title>().Property(x => x.Timestamp).HasColumnName("timestamp");
+            modelBuilder.Entity<Bookmarks_Title>().Property(x => x.Timestamp).HasColumnName("timestamp").HasDefaultValueSql("CURRENT_TIMESTAMP");
 
             modelBuilder.Entity<Character>().ToTable("characters");
             modelBuilder.Entity<Character>().Property(x => x.Personality_Id).HasColumnName("personality_ID");
@@ -94,7 +94,7 @@ namespace Rawdata_Porfolio_2.Entity_Framework
             modelBuilder.Entity<Rating>().Property(x => x.User_Id).HasColumnName("user_ID");
             modelBuilder.Entity<Rating>().Property(x => x.Title_Id).HasColumnName("title_ID");
             modelBuilder.Entity<Rating>().Property(x => x.RatingOfTitle).HasColumnName("rating");
-            modelBuilder.Entity<Rating>().Property(x => x.Timestamp).HasColumnName("timestamp");
+            modelBuilder.Entity<Rating>().Property(x => x.Timestamp).HasColumnName("timestamp").HasDefaultValueSql("CURRENT_TIMESTAMP");
 
             modelBuilder.Entity<Role>().ToTable("roles");
             modelBuilder.Entity<Role>().Property(x => x.Personality_Id).HasColumnName("personality_ID");
@@ -105,7 +105,7 @@ namespace Rawdata_Porfolio_2.Entity_Framework
             modelBuilder.Entity<Search_Queries>().ToTable("search_queries");
             modelBuilder.Entity<Search_Queries>().Property(x => x.Id).HasColumnName("ID");
             modelBuilder.Entity<Search_Queries>().Property(x => x.Query).HasColumnName("query");
-            modelBuilder.Entity<Search_Queries>().Property(x => x.Timestamp).HasColumnName("timestamp");
+            modelBuilder.Entity<Search_Queries>().Property(x => x.Timestamp).HasColumnName("timestamp").HasDefaultValueSql("CURRENT_TIMESTAMP");
             modelBuilder.Entity<Search_Queries>().Property(x => x.User_Id).HasColumnName("userID");
             
 
@@ -144,7 +144,7 @@ namespace Rawdata_Porfolio_2.Entity_Framework
             modelBuilder.Entity<User>().Property(x => x.Password).HasColumnName("password");
             modelBuilder.Entity<User>().Property(x => x.Email).HasColumnName("email");
             modelBuilder.Entity<User>().Property(x => x.DateOfBirth).HasColumnName("dob");
-            modelBuilder.Entity<User>().Property(x => x.Created).HasColumnName("created"); 
+            modelBuilder.Entity<User>().Property(x => x.Created).HasColumnName("created").HasDefaultValueSql("CURRENT_TIMESTAMP"); 
         //  modelBuilder.Entity<User>().Property(x => x.Is_Admin).HasColumnName("isAdmin"); if we have time to make admin roles :)
     
 
